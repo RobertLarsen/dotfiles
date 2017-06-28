@@ -86,7 +86,7 @@ endfunction
 function! PHPsave()
     let l:tmpname = tempname()
     call writefile(GetLines(), l:tmpname)
-    let l:cmd = join(['php-cs-fixer', '--no-ansi', '--no-interaction', '--quiet', 'fix', l:tmpname], ' ')
+    let l:cmd = join(['php-cs-fixer', '--no-ansi', '--no-interaction', '--quiet', 'fix', l:tmpname, '--rules=@PSR2'], ' ')
     call system(l:cmd)
     call rename(l:tmpname, expand("%"))
     silent! edit!
