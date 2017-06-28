@@ -66,6 +66,33 @@ function! VCSStatus()
     endif
 endfunction
 
+function! GetLines()
+  let buf = getline(1, '$')
+  if &encoding != 'utf-8'
+    let buf = map(buf, 'iconv(v:val, &encoding, "utf-8")')
+  endif
+  if &l:fileformat == 'dos'
+    " XXX: line2byte() depend on 'fileformat' option.
+    " so if fileformat is 'dos', 'buf' must include '\r'.
+    let buf = map(buf, 'v:val."\r"')
+  endif
+  return buf
+endfunction
+
+function! System(str, ...) abort
+    return call('system', [a:str] + a:000)
+endfunction
+
+function! PHPsave()
+    let l:tmpname = tempname()
+    call writefile(GetLines(), l:tmpname)
+    let l:cmd = join(['php-cs-fixer', '--no-ansi', '--no-interaction', '--quiet', 'fix', l:tmpname], ' ')
+    call system(l:cmd)
+    call rename(l:tmpname, expand("%"))
+    silent! edit!
+    syntax on
+endfunction
+
 let mapleader = ","
 autocmd FileType java map <F8> :!ant<CR>
 autocmd FileType java map <F9> :!ant run<CR>
@@ -85,6 +112,8 @@ autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>t <Plug>(go-test)
 autocmd FileType go nmap <Leader>r <Plug>(go-run)
 autocmd FileType go nmap <Leader>b <Plug>(go-build)
+autocmd FileType php nmap <Leader>f :!php-cs-fixer --no-ansi --quiet --no-interaction fix "%"<CR><CR>L
+autocmd BufWritePre *.php call PHPsave()
 set tags+=./tags
 map <F5> :call VCSDiff()<CR>
 map <F6> :call VCSCommit()<CR>
