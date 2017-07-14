@@ -4,18 +4,24 @@ export PAGER=less
 export EDITOR=vim
 export PATH=$PATH:$HOME/.bin:$HOME/code/pwntools/bin
 export PYTHONPATH=$PYTHONPATH:$HOME/code/pwntools
-export PS1="\$(smiley) \h:\W $ "
+export PS1="\$(fancyprompt_smiley)\$(fancyprompt_git)\$(fancyprompt_basedir) $ ";
 export VAGRANT_DEFAULT_PROVIDER=vmware_workstation
 export TERM=xterm-256color
 export DEBFULLNAME="Robert Larsen"
 export DEBEMAIL="robert@the-playground.dk"
 export GOPATH=~/code/Go
 
-CLEAR_LINE="\033[2K\r"
-COLOR_GREEN="\033[32m"
-COLOR_YELLOW="\033[33m"
-COLOR_RED="\033[31m"
-COLOR_RESET="\033[0m"
+CLEAR_LINE="\e[2K\r";
+BG_COLOR_WHITE="\e[107m";
+BG_COLOR_YELLOW="\e[43m";
+BG_COLOR_GREEN="\e[42m";
+COLOR_BLACK="\e[30m";
+COLOR_GREEN="\e[32m";
+COLOR_YELLOW="\e[33m";
+COLOR_CYAN="\e[36m";
+COLOR_RED="\e[31m";
+COLOR_WHITE="\e[97m";
+COLOR_RESET="\e[0m";
 
 alias dkpg=dpkg
 alias mdkir=mkdir
@@ -32,6 +38,29 @@ alias msfvenom="docker run --rm -it robertlarsen/metasploit msfvenom"
 alias d=./dev
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
+function fancyprompt_smiley(){
+    if [ $? == 0 ]; then
+        echo -e "${BG_COLOR_WHITE}${COLOR_GREEN}\u263a ${COLOR_RESET}";
+    else
+        echo -e "${BG_COLOR_WHITE}${COLOR_RED}\u2639 ${COLOR_RESET}";
+    fi
+};
+
+function fancyprompt_basedir(){
+    echo -e "${BG_COLOR_GREEN}${COLOR_WHITE} /$(basename $(pwd))/ ${COLOR_RESET}";
+};
+
+function fancyprompt_git(){
+    if git status >/dev/null 2>&1; then
+        if test "$(git status --porcelain)" == ""; then
+            echo -en "\e[48;5;021m";
+        else
+            echo -en "\e[48;5;162m";
+        fi;
+        echo -e "${COLOR_WHITE} $(git rev-parse --abbrev-ref HEAD 2>/dev/null) ${COLOR_RESET}";
+    fi
+};
+
 function print_status(){
     echo -ne "${CLEAR_LINE}${COLOR_YELLOW}${1}${COLOR_RESET}"
 }
@@ -42,14 +71,6 @@ function print_success(){
 
 function print_failure(){
     echo -e "${CLEAR_LINE}${COLOR_RED}${1}${COLOR_RESET}"
-}
-
-smiley(){
-    if [ $? == 0 ]; then
-        echo -e ':)'
-    else
-        echo -e ':('
-    fi
 }
 
 OpenEncrypted(){
