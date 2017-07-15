@@ -36,6 +36,7 @@ alias dquilt="quilt --quiltrc=${HOME}/.bin/quiltrc-dpkg"
 alias msfconsole="docker run --rm -it robertlarsen/metasploit msfconsole"
 alias msfvenom="docker run --rm -it robertlarsen/metasploit msfvenom"
 alias d=./dev
+alias irssi="docker run -it --rm -v /etc/localtime:/etc/localtime:ro -v $HOME/.irssi:/home/user/.irssi:ro --read-only --name irssi -e TERM -u $(id -u):$(id -g) irssi"
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
 function fancyprompt_smiley(){
