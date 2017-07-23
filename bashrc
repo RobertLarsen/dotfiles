@@ -4,7 +4,7 @@ export PAGER=less
 export EDITOR=vim
 export PATH=$PATH:$HOME/.bin:$HOME/code/pwntools/bin
 export PYTHONPATH=$PYTHONPATH:$HOME/code/pwntools
-export PS1="\$(fancyprompt_smiley)\$(fancyprompt_git)\$(fancyprompt_basedir) $ ";
+export PS1="\$(fancyprompt) $ ";
 export VAGRANT_DEFAULT_PROVIDER=vmware_workstation
 export TERM=xterm-256color
 export DEBFULLNAME="Robert Larsen"
@@ -12,16 +12,23 @@ export DEBEMAIL="robert@the-playground.dk"
 export GOPATH=~/code/Go
 
 CLEAR_LINE="\e[2K\r";
-BG_COLOR_WHITE="\e[107m";
-BG_COLOR_YELLOW="\e[43m";
-BG_COLOR_GREEN="\e[42m";
-COLOR_BLACK="\e[30m";
-COLOR_GREEN="\e[32m";
-COLOR_YELLOW="\e[33m";
-COLOR_CYAN="\e[36m";
-COLOR_RED="\e[31m";
-COLOR_WHITE="\e[97m";
-COLOR_RESET="\e[0m";
+BG_COLOR_WHITE="\001$(tput setab 7)\002";
+BG_COLOR_YELLOW="\001$(tput setab 226)\002";
+BG_COLOR_GREEN="\001$(tput setab 40)\002";
+COLOR_BLACK="\001$(tput setaf 16)\002";
+COLOR_GREEN="\001$(tput setaf 40)\002";
+COLOR_YELLOW="\001$(tput setaf 226)\002";
+COLOR_CYAN="\001$(tput setaf 87)\002";
+COLOR_RED="\001$(tput setaf 1)\002";
+COLOR_WHITE="\001$(tput setaf 7)\002";
+COLOR_RESET="\001$(tput sgr0)\002";
+
+function tput_colors(){
+    echo "tput setaf <number>"
+    for i in {0..255}; do if ! test 0 -eq $i && test 0 -eq $((i%16)); then echo; fi; printf $(tput setaf $i)"%03d " $i; done; echo
+    echo "tput setab <number>"
+    for i in {0..255}; do if ! test 0 -eq $i && test 0 -eq $((i%16)); then echo; fi; printf $(tput setab $i)"%03d " $i; done; echo
+}
 
 alias dkpg=dpkg
 alias mdkir=mkdir
@@ -39,6 +46,10 @@ alias d=./dev
 alias irssi="docker run -it --rm -v /etc/localtime:/etc/localtime:ro -v $HOME/.irssi:/home/user/.irssi:ro --read-only --name irssi -e TERM -u $(id -u):$(id -g) irssi"
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
+function fancyprompt(){
+    echo -en "$(fancyprompt_smiley)$(fancyprompt_git)$(fancyprompt_basedir)"
+}
+
 function fancyprompt_smiley(){
     if [ $? == 0 ]; then
         echo -e "${BG_COLOR_WHITE}${COLOR_GREEN}\u263a ${COLOR_RESET}";
@@ -54,9 +65,9 @@ function fancyprompt_basedir(){
 function fancyprompt_git(){
     if git status >/dev/null 2>&1; then
         if test "$(git status --porcelain)" == ""; then
-            echo -en "\e[48;5;021m";
+            echo -en "\001\e[48;5;021m\002";
         else
-            echo -en "\e[48;5;162m";
+            echo -en "\001\e[48;5;162m\002";
         fi;
         echo -e "${COLOR_WHITE} $(git rev-parse --abbrev-ref HEAD 2>/dev/null) ${COLOR_RESET}";
     fi
