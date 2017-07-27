@@ -64,7 +64,7 @@ function fancyprompt_basedir(){
 
 function fancyprompt_git(){
     if git status >/dev/null 2>&1; then
-        if test "$(git status --porcelain)" == ""; then
+        if test "$(git status --porcelain | grep -Ev '^\?\?')" == ""; then
             echo -en "\001\e[48;5;021m\002";
         else
             echo -en "\001\e[48;5;162m\002";
