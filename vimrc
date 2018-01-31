@@ -125,7 +125,6 @@ nmap <F8> :TagbarToggle<CR>
 "YCM
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_filetype_whitelist = {'js':1,'py':1,'c':1}
 
 "UltiSnips
