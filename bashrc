@@ -59,7 +59,7 @@ function fancyprompt_smiley(){
 };
 
 function fancyprompt_basedir(){
-    echo -e "${BG_COLOR_GREEN}${COLOR_WHITE} /$(basename $(pwd))/ ${COLOR_RESET}";
+    echo -e "${BG_COLOR_GREEN}${COLOR_WHITE} /$(basename "$(pwd)")/ ${COLOR_RESET}";
 };
 
 function fancyprompt_git(){
