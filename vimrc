@@ -134,3 +134,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 set secure
+"if has("gui_running")
+    highlight SpellBad ctermbg=DarkBlue gui=undercurl guisp=Orange
+"endif
