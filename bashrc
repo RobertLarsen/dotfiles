@@ -222,3 +222,65 @@ function vadush(){
 function vadu(){
    vagrant destroy -f $* && vagrant up $*
 }
+
+function backup(){
+    PATHS_TO_BACKUP=(
+        $HOME
+        /etc/fstab
+        /etc/hosts
+        /etc/apache2
+        /var/www
+    )
+    test -n "$BACKUP_DESTINATION" || BACKUP_DESTINATION=/media/bluedisk/Backup/$(hostname)
+    
+    backup_directory(){
+        rsync -azv --copy-links --ignore-errors \
+            --exclude ".repositories" \
+            --exclude ".thumbnails" \
+            --exclude ".config" \
+            --exclude ".npm" \
+            --exclude ".cache" \
+            --exclude ".vagrant.d" \
+            --exclude ".cache" \
+            --exclude ".local" \
+            --exclude ".Private" \
+            --exclude ".VirtualBox" \
+            --exclude ".wine" \
+            --exclude ".gvfs" \
+            --exclude ".steam" \
+            --exclude "VirtualBox VMs" \
+            --exclude "vmware" \
+            --exclude ".vagrant" \
+            --exclude ".vim" \
+            --exclude "pwnadventure" \
+            --no-g --no-o --delete --progress "$1" "$BACKUP_DESTINATION"
+    }
+    
+    backup_file(){
+        cp "$1" "$BACKUP_DESTINATION"
+    }
+    
+    do_backup(){
+        if [ -d "$1" ]; then
+            backup_directory "$1"
+        else
+            backup_file "$1"
+        fi
+    }
+    
+    
+    if test -d "$BACKUP_DESTINATION" >/dev/null; then
+        date > "$BACKUP_DESTINATION/last_backup_time"
+    
+        for ((i=0; $i<${#PATHS_TO_BACKUP[*]}; i=$((i+1)) )); do
+            path=${PATHS_TO_BACKUP[$i]}
+            do_backup $path
+        done
+    
+        crontab -l > "$BACKUP_DESTINATION/crontab"
+        dpkg --get-selections > "$BACKUP_DESTINATION/dpkg-selections"
+        df -h > "$BACKUP_DESTINATION/df-h"
+        DISPLAY=:0.0 scrot "$BACKUP_DESTINATION/screenshot.png"
+        date >> "$BACKUP_DESTINATION/last_backup_time"
+    fi
+}
