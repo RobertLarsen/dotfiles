@@ -272,9 +272,9 @@ function backup(){
     if test -d "$BACKUP_DESTINATION" >/dev/null; then
         date > "$BACKUP_DESTINATION/last_backup_time"
     
-        for ((i=0; $i<${#PATHS_TO_BACKUP[*]}; i=$((i+1)) )); do
+        for (( i=0; i<${#PATHS_TO_BACKUP[*]}; i=$((i+1)) )); do
             path=${PATHS_TO_BACKUP[$i]}
-            do_backup $path
+            do_backup "$path"
         done
     
         crontab -l > "$BACKUP_DESTINATION/crontab"
