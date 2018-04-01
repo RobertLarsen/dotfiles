@@ -228,8 +228,6 @@ function backup(){
         $HOME
         /etc/fstab
         /etc/hosts
-        /etc/apache2
-        /var/www
     )
     test -n "$BACKUP_DESTINATION" || BACKUP_DESTINATION=/media/bluedisk/Backup/$(hostname)
     
