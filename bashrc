@@ -251,6 +251,9 @@ function backup(){
             --exclude ".vagrant" \
             --exclude ".vim" \
             --exclude "pwnadventure" \
+            --exclude "Android" \
+            --exclude ".android" \
+            --exclude ".gradle" \
             --no-g --no-o --delete --progress "$1" "$BACKUP_DESTINATION"
     }
     
