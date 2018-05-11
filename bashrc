@@ -96,22 +96,22 @@ OpenEncrypted(){
     TEMPFILE1=$(tempfile)
     TEMPFILE2=$(tempfile)
 
-    gpg -o - "$ENCRYPTEDFILE" > $TEMPFILE1
+    gpg -o - "${ENCRYPTEDFILE}" > "${TEMPFILE1}"
     if [ "$?" != "0" ]; then
         return
     fi
-    cp $TEMPFILE1 $TEMPFILE2
+    cp "${TEMPFILE1}" "${TEMPFILE2}"
 
-    vim $TEMPFILE1
-    diff $TEMPFILE1 $TEMPFILE2 >/dev/null 2>&1
+    vim "${TEMPFILE1}"
+    diff "${TEMPFILE1}" "${TEMPFILE2}" >/dev/null 2>&1
     if [ "$?" != "0" ]; then
         CODE=1
         while [ "$CODE" != "0" ]; do
-            gpg -o - --symmetric $TEMPFILE1 > "$ENCRYPTEDFILE"
+            gpg -o - --symmetric "${TEMPFILE1}" > "${ENCRYPTEDFILE}"
             CODE=$?
         done
     fi
-    wipe -fs $TEMPFILE1 $TEMPFILE2
+    wipe -fs "${TEMPFILE1}" "${TEMPFILE2}"
 }
 
 VimPasswords(){
@@ -123,7 +123,7 @@ Password(){
     if ! test -f "${file}"; then
         file="$HOME/.passwords.txt.gpg"
     fi
-    gpg < "$file" | grep -i $1
+    gpg < "$file" | grep -i "${1}"
 }
 
 function home(){
@@ -131,7 +131,7 @@ function home(){
 }
 
 function trampolines(){
-    ROPgadget --binary ${1} | grep -E ': ((call)|(jmp)) (e|r)'
+    ROPgadget --binary "${1}" | grep -E ': ((call)|(jmp)) (e|r)'
 }
 
 function pwn(){
@@ -162,7 +162,7 @@ EOF
 
 function c(){
     if [[ "${1}" == "" ]]; then
-        fname=$(basename $(pwd) | tr A-Z a-z).c
+        fname=$(basename "$(pwd)" | tr '[:upper:]' '[:lower:]').c
     else
         fname="${1}"
     fi
@@ -216,11 +216,11 @@ EOF
 }
 
 function vadush(){
-   vagrant destroy -f $* && vagrant up $* && vagrant ssh $1
+   vagrant destroy -f "$@" && vagrant up "$@" && vagrant ssh "$1"
 }
 
 function vadu(){
-   vagrant destroy -f $* && vagrant up $*
+   vagrant destroy -f "$@" && vagrant up "$@"
 }
 
 function backup(){
