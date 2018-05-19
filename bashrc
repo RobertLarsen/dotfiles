@@ -254,6 +254,8 @@ function backup(){
             --exclude "Android" \
             --exclude ".android" \
             --exclude ".gradle" \
+            --exclude ".AndroidStudio3.1" \
+            --exclude "Videos" \
             --no-g --no-o --delete --progress "$1" "$BACKUP_DESTINATION"
     }
     
