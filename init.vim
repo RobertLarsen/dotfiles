@@ -37,6 +37,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#syntax#min_keyword_length = 2
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-5.0/lib/libclang.so.1'
+au BufRead,BufNewFile *.nasm set filetype=nasm
 
 map <F5> :Gdiff<CR>
 map <F6> :Gcommit<CR>
