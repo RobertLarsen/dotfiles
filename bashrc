@@ -233,6 +233,7 @@ function backup(){
     
     backup_directory(){
         rsync -azv --copy-links --ignore-errors \
+            --exclude "Browsers" \
             --exclude ".repositories" \
             --exclude ".thumbnails" \
             --exclude ".config" \
