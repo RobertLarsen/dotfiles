@@ -148,15 +148,15 @@ function pwn(){
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-from pwn import *
+from pwn import context, asm, shellcraft, remote, process, flat, fit
 
-context(arch = 'i386', os = 'linux')
+context(arch='i386', os='linux')
 
 SHELLCODE = asm(shellcraft.findpeersh())
 
 EOF
         chmod +x "${fname}"
-        vim "${fname}"
+        nvim "${fname}"
     fi
 }
 
@@ -211,7 +211,7 @@ ${fname%.c}
 core
 EOF
         fi
-		vim "${fname}"
+		nvim "${fname}"
     fi
 }
 
