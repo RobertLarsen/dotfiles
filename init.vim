@@ -18,6 +18,7 @@ Plug 'fatih/vim-go'
 Plug 'PProvost/vim-ps1'
 Plug 'tpope/vim-eunuch'
 Plug 'w0rp/ale'
+Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 syntax on
