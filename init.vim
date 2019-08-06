@@ -32,6 +32,8 @@ set smartcase
 set number
 set si
 set exrc
+set foldnestmax=1
+set foldmethod=indent
 filetype plugin indent on
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
