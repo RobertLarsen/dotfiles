@@ -30,7 +30,7 @@ set tabstop=4
 set shiftwidth=4
 set ignorecase
 set smartcase
-set number
+set number relativenumber
 set si
 set exrc
 set foldnestmax=1
