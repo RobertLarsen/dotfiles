@@ -233,7 +233,6 @@ function backup(){
     
     backup_directory(){
         rsync -azv --copy-links --ignore-errors \
-            --exclude "Browsers" \
             --exclude ".repositories" \
             --exclude ".thumbnails" \
             --exclude ".config" \
@@ -247,18 +246,16 @@ function backup(){
             --exclude ".wine" \
             --exclude ".gvfs" \
             --exclude ".steam" \
-            --exclude "VirtualBox VMs" \
-            --exclude "vmware" \
             --exclude ".vagrant" \
             --exclude ".vim" \
-            --exclude "pwnadventure" \
-            --exclude "Android" \
             --exclude ".android" \
             --exclude ".gradle" \
             --exclude ".AndroidStudio3.1" \
-            --exclude "buildroot-2018.02.2" \
-            --exclude "Browser" \
+            --exclude "no-backup" \
+            --exclude "Android" \
             --exclude "Videos" \
+            --exclude "VirtualBox VMs" \
+            --exclude "vmware" \
             --no-g --no-o --delete --progress "$1" "$BACKUP_DESTINATION"
     }
     
