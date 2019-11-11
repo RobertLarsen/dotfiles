@@ -246,7 +246,7 @@ EOF
     test -f Makefile || cat >Makefile<<EOF
 obj-m += ${fname}.o
 EOF
-    test -e kernel || ln -s $HOME/code/linux-stable kernel
+    test -e kernel || ln -s /lib/modules/$(uname -r)/build/ kernel
     vim ${fname}.c
 }
 
