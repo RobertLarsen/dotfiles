@@ -215,6 +215,41 @@ EOF
     fi
 }
 
+function kernmod(){
+    if [[ "${1}" == "" ]]; then
+        fname=$(basename $(pwd) | tr A-Z a-z)
+    else
+        fname="${1}"
+    fi
+    
+    test -f ${fname}.c || cat >"${fname}.c"<<EOF
+#include <linux/module.h>
+#include <linux/init.h>
+
+static int __init my_init(void)
+{
+    pr_info("Hello: module loaded at %p\n", my_init);
+    return 0;
+}
+
+static void __exit my_free(void)
+{
+    pr_info("Bye: module unloaded at %p\n", my_free);
+}
+
+module_init(my_init);
+module_exit(my_free);
+
+MODULE_AUTHOR("Robert Larsen <robert@the-playground.dk>");
+MODULE_LICENSE("GPL v2");
+EOF
+    test -f Makefile || cat >Makefile<<EOF
+obj-m += ${fname}.o
+EOF
+    test -e kernel || ln -s $HOME/code/linux-stable kernel
+    vim ${fname}.c
+}
+
 function vadush(){
    vagrant destroy -f "$@" && vagrant up "$@" && vagrant ssh "$1"
 }
