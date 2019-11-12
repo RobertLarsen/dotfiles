@@ -225,6 +225,8 @@ function kernmod(){
     test -f ${fname}.c || cat >"${fname}.c"<<EOF
 #include <linux/module.h>
 #include <linux/init.h>
+#include <linux/list.h> /* Linked list structures and functions */
+#include <linux/slab.h> /* kmalloc, kfree */
 
 static int __init my_init(void)
 {
