@@ -227,16 +227,17 @@ function kernmod(){
 #include <linux/init.h>
 #include <linux/list.h> /* Linked list structures and functions */
 #include <linux/slab.h> /* kmalloc, kfree */
+#include <linux/sched.h> /* task_struct */
 
 static int __init my_init(void)
 {
-    pr_info("Hello: module loaded at %p\n", my_init);
+    pr_info(KBUILD_MODNAME " loaded at %p\n", my_init);
     return 0;
 }
 
 static void __exit my_free(void)
 {
-    pr_info("Bye: module unloaded at %p\n", my_free);
+    pr_info(KBUILD_MODNAME " unloaded at %p\n", my_free);
 }
 
 module_init(my_init);
