@@ -225,9 +225,11 @@ function kernmod(){
     test -f ${fname}.c || cat >"${fname}.c"<<EOF
 #include <linux/module.h>
 #include <linux/init.h>
-#include <linux/list.h> /* Linked list structures and functions */
-#include <linux/slab.h> /* kmalloc, kfree */
-#include <linux/sched.h> /* task_struct */
+#include <linux/list.h>    /* Linked list structures and functions */
+#include <linux/slab.h>    /* kmalloc, kfree */
+#include <linux/sched.h>   /* task_struct */
+#include <linux/uaccess.h> /* copy_(to,from)_user */
+#include <linux/cdev.h>    /* character device */
 
 static int __init my_init(void)
 {
