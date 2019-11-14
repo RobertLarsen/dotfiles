@@ -230,6 +230,7 @@ function kernmod(){
 #include <linux/sched.h>   /* task_struct */
 #include <linux/uaccess.h> /* copy_(to,from)_user */
 #include <linux/cdev.h>    /* character device */
+#include <linux/fs.h>      /* file_operations */
 
 static int __init my_init(void)
 {
