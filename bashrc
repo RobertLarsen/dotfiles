@@ -167,11 +167,13 @@ function c(){
         fname="${1}"
     fi
 
-    if test -f "${fname}"; then
+    test -d src || mkdir src
+
+    if test -f "src/${fname}"; then
         echo "${fname} already exists."
         false
     else
-        cat >"${fname}"<<EOF
+        cat >"src/${fname}"<<EOF
 #include <stdio.h>
 
 int main(int argc __attribute__((unused)), char ** argv __attribute__((unused))) {
@@ -187,22 +189,17 @@ def FlagsForFile(f):
     }
 EOF
         fi
-        if ! test -f Makefile; then
-            cat >Makefile<<EOF
-CFLAGS=-Wall -Wextra -ggdb
-.phony: run clean all
 
-all: ${fname%.c}
+        if ! test -f CMakeLists.txt; then
+            cat >CMakeLists.txt<<EOF
+cmake_minimum_required(VERSION 3.5)
+project(${fname%.c})
 
-${fname%.c}: ${fname}
-
-clean:
-	rm -f ${fname%.c}
-
-run: ${fname%.c}
-	./${fname%.c}
+set(CMAKE_C_FLAGS "-ggdb")
+add_executable(${fname%.c} src/${fname})
 EOF
         fi
+
         if ! test -f .gitignore; then
             cat >.gitignore<<EOF
 **/*.o
@@ -211,7 +208,7 @@ ${fname%.c}
 core
 EOF
         fi
-		nvim "${fname}"
+		nvim "src/${fname}"
     fi
 }
 
