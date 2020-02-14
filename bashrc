@@ -146,7 +146,7 @@ function pwn(){
         false
     else
         cat > "${fname}"<<EOF
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from pwn import context, asm, shellcraft, remote, process, flat, fit
