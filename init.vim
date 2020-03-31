@@ -51,6 +51,7 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 if has("cscope")
+        set nocsverb	" Make cs not verbose
         " Look for a 'cscope.out' file starting from the current directory,
         " going up to the root directory.
         let s:dirs = split(getcwd(), "/")
