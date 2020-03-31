@@ -49,3 +49,32 @@ map <F7> :Gstatus<CR>
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+if has("cscope")
+        " Look for a 'cscope.out' file starting from the current directory,
+        " going up to the root directory.
+        let s:dirs = split(getcwd(), "/")
+        while s:dirs != []
+                let s:path = "/" . join(s:dirs, "/")
+                if (filereadable(s:path . "/cscope.out"))
+                        execute "cs add " . s:path . "/cscope.out " . s:path . " -v"
+                        break
+                endif
+                let s:dirs = s:dirs[:-2]
+        endwhile
+
+        set csto=0	" Use cscope first, then ctags
+        set cst		" Only search cscope
+        set csverb	" Make cs verbose
+
+        nmap <C-s>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-s>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-s>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-s>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-s>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-s>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <C-s>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        nmap <C-s>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+        " Open a quickfix window for the following queries.
+        set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
+endif
