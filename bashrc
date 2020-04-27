@@ -248,7 +248,17 @@ MODULE_AUTHOR("Robert Larsen <robert@the-playground.dk>");
 MODULE_LICENSE("GPL v2");
 EOF
     test -f Makefile || cat >Makefile<<EOF
-obj-m += ${fname}.o
+KDIR = /lib/modules/\`uname -r\`/build
+
+kbuild:
+	make -C \$(KDIR) M=\`pwd\`
+
+clean:
+	make -C \$(KDIR) M=\`pwd\` clean
+EOF
+    test -f Kbuild || cat >Kbuild<<EOF
+EXTRA_FLAGS = -Wall -g
+obj-m       = ${fname}.o
 EOF
     test -e kernel || ln -s /lib/modules/$(uname -r)/build/ kernel
     vim ${fname}.c
