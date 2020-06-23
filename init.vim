@@ -42,6 +42,16 @@ let g:deoplete#sources#syntax#min_keyword_length = 2
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-5.0/lib/libclang.so.1'
 au BufRead,BufNewFile *.nasm set filetype=nasm
 
+" Reload Vim configuration file after saving it
+if !exists('*ReloadVimrc')
+   fun! ReloadVimrc()
+       let save_cursor = getcurpos()
+       source $MYVIMRC
+       call setpos('.', save_cursor)
+   endfun
+endif
+autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
+
 map <F5> :Gdiff<CR>
 map <F6> :Gcommit<CR>
 map <F7> :Gstatus<CR>
