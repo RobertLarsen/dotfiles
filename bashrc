@@ -37,14 +37,12 @@ alias sl=ls
 alias ci='git commit'
 alias st='git status'
 alias log='git log'
-alias revert='svn revert'
-alias slack="/opt/google/chrome/google-chrome --app=https://cego.slack.com/messages/general/"
 alias PS1="export PS1='$ '"
-alias dquilt="quilt --quiltrc=${HOME}/.bin/quiltrc-dpkg"
 alias msfconsole="docker run --rm -it robertlarsen/metasploit msfconsole"
 alias msfvenom="docker run --rm -it robertlarsen/metasploit msfvenom"
 alias d=./dev
-alias irssi="docker run -it --rm -v /etc/localtime:/etc/localtime:ro -v $HOME/.irssi:/home/user/.irssi:ro --read-only --name irssi -e TERM -u $(id -u):$(id -g) irssi"
+alias www='python -m SimpleHTTPServer'
+
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
 function fancyprompt(){
@@ -335,4 +333,28 @@ function backup(){
         DISPLAY=:0.0 scrot "$BACKUP_DESTINATION/screenshot.png"
         date >> "$BACKUP_DESTINATION/last_backup_time"
     fi
+}
+
+function run_qemu(){
+    cd ~/code/linux-kernel-labs/tools/labs || return
+    while true; do
+        while ! test -f start_vm; do
+            sleep 1
+        done
+        rm start_vm
+        make boot
+        killall minicom
+    done
+}
+
+function run_minicom(){
+    cd ~/code/linux-kernel-labs/tools/labs || return
+    while true; do 
+        while ! test -e serial.pts; do 
+            clear
+            echo "$(date) - Wait for VM"
+            sleep 1
+        done
+        minicom -D serial.pts
+    done
 }
