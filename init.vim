@@ -4,21 +4,30 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+"Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-clang'
+"Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-clang'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'} 
+Plug 'neoclide/coc-rls'
+Plug 'neoclide/coc-python'
+Plug 'josa42/coc-sh'
+Plug 'fannheyward/coc-markdownlint'
+Plug 'clangd/coc-clangd'
+
 Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 Plug 'PProvost/vim-ps1'
 Plug 'tpope/vim-eunuch'
-Plug 'w0rp/ale'
-Plug 'OmniSharp/omnisharp-vim'
+"Plug 'w0rp/ale'
+"Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
 syntax on
@@ -41,6 +50,7 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#syntax#min_keyword_length = 2
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-5.0/lib/libclang.so.1'
 au BufRead,BufNewFile *.nasm set filetype=nasm
+let g:neosnippet#snippets_directory = '~/.local/share/nvim/plugged/neosnippet-snippets/neosnippets'
 
 " Reload Vim configuration file after saving it
 if !exists('*ReloadVimrc')
