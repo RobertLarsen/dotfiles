@@ -30,6 +30,15 @@ Plug 'tpope/vim-eunuch'
 "Plug 'OmniSharp/omnisharp-vim'
 call plug#end()
 
+function! MyHighlights() abort
+    highlight Pmenu ctermbg=232 ctermfg=231
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
+
 syntax on
 colo elflord
 set hlsearch
