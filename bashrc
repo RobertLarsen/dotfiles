@@ -95,7 +95,7 @@ OpenEncrypted(){
     TEMPFILE1=$(tempfile)
     TEMPFILE2=$(tempfile)
 
-    gpg -o - "${ENCRYPTEDFILE}" > "${TEMPFILE1}"
+    gpg --decrypt -o - "${ENCRYPTEDFILE}" > "${TEMPFILE1}"
     if [ "$?" != "0" ]; then
         return
     fi
@@ -122,7 +122,7 @@ Password(){
     if ! test -f "${file}"; then
         file="$HOME/.passwords.txt.gpg"
     fi
-    gpg < "$file" | grep -i "${1}"
+    gpg --decrypt < "$file" | grep -i "${1}"
 }
 
 function home(){
