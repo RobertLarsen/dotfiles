@@ -358,3 +358,12 @@ function run_minicom(){
         minicom -D serial.pts
     done
 }
+
+function find_elfs(){
+    ROOT=${1:-/}
+    find "${ROOT}" -executable | while read path; do
+        if readelf -h "${path}" >/dev/null 2>&1; then
+            echo "${path}"
+        fi
+    done
+}
