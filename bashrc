@@ -361,7 +361,7 @@ function run_minicom(){
 
 function find_elfs(){
     ROOT=${1:-/}
-    find "${ROOT}" -executable | while read path; do
+    find "${ROOT}" -executable 2>/dev/null | while read path; do
         if readelf -h "${path}" >/dev/null 2>&1; then
             echo "${path}"
         fi
