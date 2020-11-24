@@ -10,6 +10,9 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'zchee/deoplete-jedi'
 "Plug 'zchee/deoplete-clang'
 
+Plug 'preservim/tagbar'
+Plug 'rust-lang/rust.vim'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'} 
 Plug 'neoclide/coc-rls'
@@ -74,6 +77,7 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 map <F5> :Gdiff<CR>
 map <F6> :Gcommit<CR>
 map <F7> :Gstatus<CR>
+nmap <F8> :TagbarToggle<CR>
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
