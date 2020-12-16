@@ -17,6 +17,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'} 
 Plug 'neoclide/coc-rls'
 Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-java'
 Plug 'josa42/coc-sh'
 Plug 'fannheyward/coc-markdownlint'
 Plug 'clangd/coc-clangd'
