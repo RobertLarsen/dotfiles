@@ -32,19 +32,21 @@ Plug 'PProvost/vim-ps1'
 Plug 'tpope/vim-eunuch'
 "Plug 'w0rp/ale'
 "Plug 'OmniSharp/omnisharp-vim'
+
+Plug 'ParamagicDev/vim-medic_chalk'
 call plug#end()
 
-function! MyHighlights() abort
-    highlight Pmenu ctermbg=232 ctermfg=231
-endfunction
+"function! MyHighlights() abort
+"    highlight Pmenu ctermbg=232 ctermfg=231
+"endfunction
 
-augroup MyColors
-    autocmd!
-    autocmd ColorScheme * call MyHighlights()
-augroup END
+"augroup MyColors
+"    autocmd!
+"    autocmd ColorScheme * call MyHighlights()
+"augroup END
 
 syntax on
-colo elflord
+colo medic_chalk
 set hlsearch
 set incsearch
 set expandtab
@@ -57,6 +59,8 @@ set si
 set exrc
 set foldnestmax=1
 set foldmethod=indent
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:airline#extensions#coc#enabled = 1
 filetype plugin indent on
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
