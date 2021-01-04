@@ -33,6 +33,7 @@ Plug 'tpope/vim-eunuch'
 "Plug 'w0rp/ale'
 "Plug 'OmniSharp/omnisharp-vim'
 
+Plug 'RRethy/vim-illuminate'
 Plug 'ParamagicDev/vim-medic_chalk'
 call plug#end()
 
