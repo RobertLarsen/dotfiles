@@ -33,6 +33,21 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'ParamagicDev/vim-medic_chalk'
 call plug#end()
 
+let g:coc_global_extensions = [
+    \'coc-clangd',
+    \'coc-cmake',
+    \'coc-html',
+    \'coc-java',
+    \'coc-json',
+    \'coc-lists',
+    \'coc-neosnippet',
+    \'coc-pyright',
+    \'coc-rls',
+    \'coc-sh',
+    \'coc-snippets',
+    \'coc-vimlsp'
+    \]
+
 syntax on
 colo medic_chalk
 set hlsearch
