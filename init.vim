@@ -4,47 +4,34 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
-"Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-"Plug 'zchee/deoplete-jedi'
-"Plug 'zchee/deoplete-clang'
-
-Plug 'preservim/tagbar'
-Plug 'rust-lang/rust.vim'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'} 
-Plug 'neoclide/coc-rls'
-Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-java'
-Plug 'josa42/coc-sh'
-Plug 'fannheyward/coc-markdownlint'
-Plug 'clangd/coc-clangd'
-
-Plug 'scrooloose/nerdtree'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-fugitive'
-Plug 'bling/vim-airline'
-Plug 'kien/ctrlp.vim'
-"Plug 'fatih/vim-go'
-Plug 'PProvost/vim-ps1'
-Plug 'tpope/vim-eunuch'
-"Plug 'w0rp/ale'
-"Plug 'OmniSharp/omnisharp-vim'
-
-Plug 'RRethy/vim-illuminate'
-Plug 'ParamagicDev/vim-medic_chalk'
+    " Snippets
+    Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/neosnippet-snippets'
+    " Helps with pairing brackets
+    Plug 'jiangmiao/auto-pairs'
+    " Provides a nice tagbar. Press F8 to show/hide.
+    Plug 'preservim/tagbar'
+    " Autocomplete, error check, jump to definition...programmers swiss army
+    " tool
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Directory tree browser
+    Plug 'scrooloose/nerdtree'
+    " Communicates with tmux
+    Plug 'christoomey/vim-tmux-navigator'
+    " Git integration
+    Plug 'tpope/vim-fugitive'
+    " Status bar
+    Plug 'bling/vim-airline'
+    " File search with <ctrl>+p
+    " however, it seems coc has taken over <ctrl>+p
+    Plug 'kien/ctrlp.vim'
+    " File related commands, such as :Chmod, :Rename, :Move, etc
+    Plug 'tpope/vim-eunuch'
+    " Highlight all occurences of word under cursor
+    Plug 'RRethy/vim-illuminate'
+    " Awesome color scheme
+    Plug 'ParamagicDev/vim-medic_chalk'
 call plug#end()
-
-"function! MyHighlights() abort
-"    highlight Pmenu ctermbg=232 ctermfg=231
-"endfunction
-
-"augroup MyColors
-"    autocmd!
-"    autocmd ColorScheme * call MyHighlights()
-"augroup END
 
 syntax on
 colo medic_chalk
@@ -63,10 +50,6 @@ set foldmethod=indent
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 1
 filetype plugin indent on
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#syntax#min_keyword_length = 2
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-5.0/lib/libclang.so.1'
 au BufRead,BufNewFile *.nasm set filetype=nasm
 let g:neosnippet#snippets_directory = '~/.local/share/nvim/plugged/neosnippet-snippets/neosnippets'
 
@@ -89,6 +72,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" Is this necessary now that coc-clangd is in place?
 if has("cscope")
         set nocsverb	" Make cs not verbose
         " Look for a 'cscope.out' file starting from the current directory,
