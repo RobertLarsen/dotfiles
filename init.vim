@@ -62,6 +62,8 @@ set si
 set exrc
 set foldnestmax=1
 set foldmethod=indent
+set cursorline
+set mouse=a
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 1
 filetype plugin indent on
@@ -86,6 +88,14 @@ nmap <F8> :TagbarToggle<CR>
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+nnoremap <M-j> :resize -1<CR>
+nnoremap <M-k> :resize +1<CR>
+nnoremap <M-h> :vertical resize -1<CR>
+nnoremap <M-l> :vertical resize +1<CR>
+
+vnoremap < <gv
+vnoremap > >gv
 
 " Is this necessary now that coc-clangd is in place?
 if has("cscope")
