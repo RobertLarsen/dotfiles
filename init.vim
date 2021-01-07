@@ -40,12 +40,14 @@ let g:coc_global_extensions = [
     \'coc-java',
     \'coc-json',
     \'coc-lists',
+    \'coc-marketplace',
     \'coc-neosnippet',
     \'coc-pyright',
     \'coc-rls',
     \'coc-sh',
     \'coc-snippets',
-    \'coc-vimlsp'
+    \'coc-vimlsp',
+    \'coc-yaml'
     \]
 
 syntax on
