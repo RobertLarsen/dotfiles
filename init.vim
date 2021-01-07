@@ -36,6 +36,7 @@ call plug#end()
 let g:coc_global_extensions = [
     \'coc-clangd',
     \'coc-cmake',
+    \'coc-explorer',
     \'coc-html',
     \'coc-java',
     \'coc-json',
