@@ -97,6 +97,10 @@ nnoremap <M-l> :vertical resize +1<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+nmap <space>e :CocCommand explorer<CR>
+nmap <space>f :CocCommand explorer --preset floating<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
 " Is this necessary now that coc-clangd is in place?
 if has("cscope")
         set nocsverb	" Make cs not verbose
