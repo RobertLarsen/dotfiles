@@ -31,6 +31,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'RRethy/vim-illuminate'
     " Awesome color scheme
     Plug 'ParamagicDev/vim-medic_chalk'
+    " Integrate with ranger file manager
+    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -102,6 +104,9 @@ vnoremap > >gv
 
 nmap <space>e :execute 'CocCommand explorer' getcwd()<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
+
+nmap <space>r :RnvimrToggle<CR>
+
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Is this necessary now that coc-clangd is in place?
