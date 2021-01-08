@@ -13,7 +13,7 @@
     "explorer.previewAction.onHover": false,
     "explorer.keyMappings.global": {
         "<cr>": ["expandable?", "expand", "open"],
-        "v": "open:vsplit",
+        "s": "open:vsplit",
         "i": "open:split"
     }
 }
