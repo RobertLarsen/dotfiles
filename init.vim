@@ -66,7 +66,7 @@ set exrc
 set foldnestmax=1
 set foldmethod=indent
 set cursorline
-set mouse=a
+hi CursorLine ctermbg=235
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 1
 filetype plugin indent on
