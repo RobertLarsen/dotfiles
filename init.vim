@@ -33,7 +33,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'ParamagicDev/vim-medic_chalk'
     " Integrate with ranger file manager
     Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+    " Easyly create and manage tables
+    Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
+
+let g:table_mode_corner='+'
+let g:table_mode_header_fillchar='='
 
 let g:coc_global_extensions = [
     \'coc-clangd',
