@@ -104,6 +104,9 @@ nnoremap <M-k> :resize +1<CR>
 nnoremap <M-h> :vertical resize -1<CR>
 nnoremap <M-l> :vertical resize +1<CR>
 
+" Go to end of line when in insert mode
+inoremap <C-l> <C-o>$
+
 vnoremap < <gv
 vnoremap > >gv
 
