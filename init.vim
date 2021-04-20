@@ -73,6 +73,11 @@ set exrc
 set foldnestmax=1
 set foldmethod=indent
 set cursorline
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
 hi CursorLine ctermbg=235
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 1
@@ -110,12 +115,27 @@ inoremap <C-l> <C-o>$
 vnoremap < <gv
 vnoremap > >gv
 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 nmap <space>e :execute 'CocCommand explorer' getcwd()<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
 
 nmap <space>r :RnvimrToggle<CR>
 
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+" Delete trailing whitespace when saving
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Is this necessary now that coc-clangd is in place?
 if has("cscope")
