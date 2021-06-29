@@ -96,8 +96,8 @@ endif
 autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 
 map <F5> :Gdiff<CR>
-map <F6> :Gcommit<CR>
-map <F7> :Gstatus<CR>
+map <F6> :Git commit<CR>
+map <F7> :Git<CR>
 nmap <F8> :TagbarToggle<CR>
 
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
