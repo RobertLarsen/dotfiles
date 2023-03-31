@@ -57,8 +57,8 @@ OpenEncrypted(){
         return
     fi
 
-    TEMPFILE1=$(tempfile)
-    TEMPFILE2=$(tempfile)
+    TEMPFILE1=$(mktemp)
+    TEMPFILE2=$(mktemp)
 
     gpg --decrypt -o - "${ENCRYPTEDFILE}" > "${TEMPFILE1}"
     if [ "$?" != "0" ]; then
