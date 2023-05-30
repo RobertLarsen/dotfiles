@@ -51,7 +51,7 @@ let g:coc_global_extensions = [
     \'coc-marketplace',
     \'coc-neosnippet',
     \'coc-pyright',
-    \'coc-rls',
+    \'coc-rust-analyzer',
     \'coc-sh',
     \'coc-snippets',
     \'coc-vimlsp',
@@ -59,7 +59,8 @@ let g:coc_global_extensions = [
     \]
 
 syntax on
-colo medic_chalk
+" colo medic_chalk
+colo desert
 set hlsearch
 set incsearch
 set expandtab
@@ -175,3 +176,15 @@ if has("cscope")
         " Open a quickfix window for the following queries.
         set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 endif
+
+let g:colors = getcompletion('', 'color')
+func! NextColors()
+    let idx = index(g:colors, g:colors_name)
+    return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
+endfunc
+func! PrevColors()
+    let idx = index(g:colors, g:colors_name)
+    return (idx - 1 < 0 ? g:colors[-1] : g:colors[idx - 1])
+endfunc
+nnoremap <a-s-n> :exe "colo " .. NextColors()<CR>
+nnoremap <a-s-p> :exe "colo " .. PrevColors()<CR>
