@@ -178,13 +178,17 @@ if has("cscope")
 endif
 
 let g:colors = getcompletion('', 'color')
+func! SetColor(idx_diff)
+    let idx = (index(g:colors, g:colors_name) + len(g:colors) + a:idx_diff) % len(g:colors)
+    let c = g:colors[idx]
+    echo "Color scheme:" c
+    return c
+endfunc
 func! NextColors()
-    let idx = index(g:colors, g:colors_name)
-    return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
+    return SetColor(+1)
 endfunc
 func! PrevColors()
-    let idx = index(g:colors, g:colors_name)
-    return (idx - 1 < 0 ? g:colors[-1] : g:colors[idx - 1])
+    return SetColor(-1)
 endfunc
 nnoremap <a-s-n> :exe "colo " .. NextColors()<CR>
 nnoremap <a-s-p> :exe "colo " .. PrevColors()<CR>
