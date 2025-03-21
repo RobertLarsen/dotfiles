@@ -200,3 +200,4 @@ func! PrevColors()
 endfunc
 nnoremap <a-s-n> :exe "colo " .. NextColors()<CR>
 nnoremap <a-s-p> :exe "colo " .. PrevColors()<CR>
+nnoremap <a-s-h> :RustLsp openDocs<CR>
