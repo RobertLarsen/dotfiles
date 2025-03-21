@@ -41,6 +41,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
     " Rust tools
     Plug 'mrcjkb/rustaceanvim'
+    " Debug Adapter Protocol
+    Plug 'mfussenegger/nvim-dap'
 call plug#end()
 
 let g:table_mode_corner='+'
