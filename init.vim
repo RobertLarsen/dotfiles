@@ -35,6 +35,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
     " Easyly create and manage tables
     Plug 'dhruvasagar/vim-table-mode'
+    " Convert between hex/decimal
+    Plug 'rr-/vim-hexdec'
+    " Basic default LSP client configuration
+    Plug 'neovim/nvim-lspconfig'
+    " Rust tools
+    Plug 'mrcjkb/rustaceanvim'
 call plug#end()
 
 let g:table_mode_corner='+'
@@ -60,7 +66,7 @@ let g:coc_global_extensions = [
 
 syntax on
 " colo medic_chalk
-colo desert
+colo elflord
 set hlsearch
 set incsearch
 set expandtab
