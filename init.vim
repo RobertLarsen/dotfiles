@@ -43,7 +43,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'mrcjkb/rustaceanvim'
     " Debug Adapter Protocol
     Plug 'mfussenegger/nvim-dap'
+    " Help managing crates
+    Plug 'saecki/crates.nvim', { 'tag': 'stable' }
 call plug#end()
+
+lua require('crates').setup()
+lua require('init')
 
 let g:table_mode_corner='+'
 let g:table_mode_header_fillchar='='
@@ -201,3 +206,4 @@ endfunc
 nnoremap <a-s-n> :exe "colo " .. NextColors()<CR>
 nnoremap <a-s-p> :exe "colo " .. PrevColors()<CR>
 nnoremap <a-s-h> :RustLsp openDocs<CR>
+nnoremap <MiddleMouse> i<MiddleMouse><ESC>
